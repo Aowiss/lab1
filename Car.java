@@ -8,9 +8,20 @@ public abstract class Car implements Movable {
     public Color color; // Color of the car
     public String modelName;
 
-    public double x;
-    public double y;
+    public double GetY(){
+        return y;
+    }
+
+    public double GetX(){
+        return x;
+    }
+
+
+    private double x;
+    private double y;
     public final static double trimFactor = 1.25;
+
+
 
     private Directions directions;
 
@@ -23,7 +34,10 @@ public abstract class Car implements Movable {
     }
 
     public double getCurrentSpeed(){
+
+
         return currentSpeed;
+
     }
     public double speedFactor(){
         return enginePower * 0.01 * trimFactor;
@@ -48,8 +62,9 @@ public abstract class Car implements Movable {
         return color;
     }
 
-    public void setColor(Color clr){
+    public Color setColor(Color clr){
         color = clr;
+        return clr;
     }
 
     public void startEngine(){
@@ -62,13 +77,32 @@ public abstract class Car implements Movable {
 
     // TODO fix this method according to lab pm
     public void gas(double amount){
-        if (amount >= 0.1) incrementSpeed(amount);
+       if (amount < 0|| amount > 1) {
+            throw new IllegalArgumentException("amount is not in range");
 
+        }
+
+        incrementSpeed(amount);
+
+        if(currentSpeed > getEnginePower()){
+            currentSpeed = getEnginePower();
+        }
     }
 
     // TODO fix this method according to lab pm
     public void brake(double amount){
-        if(amount >= 0.1) decrementSpeed(amount);
+        if(amount < 0 || amount > 1) {
+            throw new IllegalArgumentException("amount is not in range");
+
+        }
+
+
+
+        decrementSpeed(amount);
+        if(currentSpeed < 0){
+            currentSpeed = 0;
+        }
+
     }
 
 
