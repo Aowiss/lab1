@@ -9,7 +9,6 @@ class Volvo240Test {
     @org.junit.jupiter.api.Test
     void getCurrentSpeed() {
         Volvo240 Volvo240 = new Volvo240();
-        Volvo240.enginePower = 23;
         assertEquals(0, Volvo240.getCurrentSpeed());
     }
 
@@ -184,16 +183,16 @@ class Volvo240Test {
 
     @org.junit.jupiter.api.Test
     void testIncrementSpeed() {
-        Volvo240 Volvo240 = new Volvo240();
+        Car car = new Saab95();
 
-        double amount = 2;
 
-        Volvo240.currentSpeed = 0;
 
-        double speedfactor = 1.25;
+        car.currentSpeed = 0;
 
-        Volvo240.incrementSpeed(2);
+        car.incrementSpeed(2);
 
-        assertNotEquals(0, Volvo240.currentSpeed + speedfactor* amount);
+
+
+        assertNotEquals(0, car.currentSpeed);
     }
 }

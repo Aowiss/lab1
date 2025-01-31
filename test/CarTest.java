@@ -9,7 +9,6 @@ class carTest {
     @org.junit.jupiter.api.Test
     void getCurrentSpeed() {
         Car car = new Saab95();
-        car.enginePower = 23;
         assertEquals(0, car.getCurrentSpeed());
     }
 
@@ -186,15 +185,15 @@ class carTest {
     void testIncrementSpeed() {
         Car car = new Saab95();
 
-        double amount = 2;
+
 
         car.currentSpeed = 0;
 
-        double speedfactor = 1.25;
-
         car.incrementSpeed(2);
 
-        assertNotEquals(0, car.currentSpeed + speedfactor* amount);
+
+
+        assertNotEquals(0, car.currentSpeed);
     }
 
 }

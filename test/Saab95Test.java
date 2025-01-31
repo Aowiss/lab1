@@ -7,7 +7,6 @@ class Saab95Test {
     @org.junit.jupiter.api.Test
     void getCurrentSpeed() {
         Saab95 sab = new Saab95();
-        sab.enginePower = 23;
         assertEquals(0, sab.getCurrentSpeed());
     }
 
@@ -35,7 +34,7 @@ class Saab95Test {
     void testspeedonbrake(){
         Saab95 sab = new Saab95();
         for(int i = 0; i<200; i++){
-            sab.brake(1);
+            sab.brake(2);
 
         }
         assertEquals(true, 0 <= sab.currentSpeed  && sab.currentSpeed <= sab.enginePower);
@@ -196,27 +195,30 @@ class Saab95Test {
     void testSpeedFactor() {
         Saab95 sab = new Saab95();
 
-        double speedfactor = sab.enginePower * 0.01 * 1;
 
-        assertEquals(1.25, speedfactor);
+        assertEquals(1.25, sab.speedFactor());
+
+        sab.setTurboOn();
+
+        assertEquals(1.625, sab.speedFactor());
+
+
+
     }
 
     @org.junit.jupiter.api.Test
     void testIncrementSpeed() {
-        Saab95 sab = new Saab95();
+        Car car = new Saab95();
 
-        double amount = 2;
 
-        sab.currentSpeed = 0;
+        car.currentSpeed = 0;
 
-        double speedfactor = 1.25;
+        car.incrementSpeed(2);
 
-        sab.incrementSpeed(2);
 
-        assertNotEquals(0, sab.currentSpeed + speedfactor* amount);
+        assertNotEquals(0, car.currentSpeed);
+
     }
-
-
 
 
 }
