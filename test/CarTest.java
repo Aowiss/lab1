@@ -39,8 +39,15 @@ class carTest {
             car.brake(1);
 
         }
-        assertEquals(true, 0 <= car.currentSpeed  && car.currentSpeed <= car.enginePower);
+        assertEquals(true, 0 <= car.getCurrentSpeed()  && car.getCurrentSpeed() <= car.getEnginePower());
     }
+
+    @org.junit.jupiter.api.Test
+    void testTooMuchGas() {
+        Car car = new Saab95();
+        assertThrows(IllegalArgumentException.class, () -> car.gas(10));
+    }
+
     @org.junit.jupiter.api.Test
     void testspeedongas(){
         Car car = new Saab95();
@@ -49,7 +56,7 @@ class carTest {
 
 
         }
-        assertEquals(true, 0 <= car.currentSpeed && car.currentSpeed <= car.enginePower);
+        assertEquals(true, 0 <= car.getCurrentSpeed() && car.getCurrentSpeed() <= car.getEnginePower());
     }
 
 
@@ -158,7 +165,7 @@ class carTest {
 
         car.startEngine();
 
-        assertEquals(0.1, car.currentSpeed);
+        assertEquals(0.1, car.getCurrentSpeed());
     }
 
     @org.junit.jupiter.api.Test
@@ -167,7 +174,7 @@ class carTest {
         Car car = new Saab95();
         car.stopEngine();
 
-        assertEquals(0, car.currentSpeed );
+        assertEquals(0, car.getCurrentSpeed() );
     }
 
 
@@ -176,7 +183,7 @@ class carTest {
     void testSpeedFactor() {
         Car car = new Saab95();
 
-        double speedfactor = car.enginePower * 0.01 * 1;
+        double speedfactor = car.getEnginePower() * 0.01 * 1;
 
         assertEquals(1.25, speedfactor);
     }
@@ -187,13 +194,12 @@ class carTest {
 
 
 
-        car.currentSpeed = 0;
 
         car.incrementSpeed(2);
 
 
 
-        assertNotEquals(0, car.currentSpeed);
+        assertNotEquals(0, car.getCurrentSpeed());
     }
 
 }

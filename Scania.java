@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scania extends Car {
+public class Scania extends Truck {
 
     public double platformAngle = 0;
 
@@ -9,32 +9,26 @@ public class Scania extends Car {
 
 
 
+
     public Scania() {
         super(3, 150, Color.white, "Scania");
 
         isPlatformraised();
+        isMoving();
 
     }
 
 
-    public boolean isMoving()
-    {
-        boolean movedetect = false;
 
-        if (currentSpeed > 0) {
-           movedetect = true;
-
-        }
-        return movedetect;
-
-    }
     public void platformRaise(double amount){
 
         if(isMoving()){
-            System.out.println("Cannot move if truck is moving!!");
+            System.out.println("Cannot move platform if truck is moving!!");
+            currentSpeed = 0;
         }
-        else if (platformAngle == maxAngle){
+        else if (platformAngle > maxAngle){
             System.out.println("Cannot move past the angle limit");
+            platformAngle = maxAngle;
         }
 
         else platformAngle += amount;
@@ -44,10 +38,12 @@ public class Scania extends Car {
 
     public void platformLower(double amount){
         if(isMoving()){
-            System.out.println("Cannot move if truck is moving!!");
+            System.out.println("Cannot move platform if truck is moving!!");
+            currentSpeed = 0;
         }
-        else if (platformAngle == minAngle){
+        else if (platformAngle < minAngle){
             System.out.println("Cannot move past the angle limit");
+            platformAngle = minAngle;
         }
         else platformAngle -= amount;
     }

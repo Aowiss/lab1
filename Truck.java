@@ -1,12 +1,18 @@
 import java.awt.*;
 
-public abstract class Car implements Movable {
+public abstract class Truck implements Movable{
 
-    private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
-    private double currentSpeed; // The current speed of the car
-    private Color color; // Color of the car
-    private String modelName;
+    public int nrDoors; // Number of doors on the car
+    public double enginePower; // Engine power of the car
+    public double currentSpeed; // The current speed of the car
+    public Color color; // Color of the car
+    public String modelName;
+
+    public PlatformState platformState;
+
+    public void getPlatformState(){
+        this.platformState = platformState;
+    }
 
 
     public double GetY(){
@@ -23,19 +29,28 @@ public abstract class Car implements Movable {
     public final static double trimFactor = 1.25;
 
 
+    public boolean isMoving() {
+        boolean movedetect = false;
 
+        if (currentSpeed > 0) {
+            movedetect = true;
+
+        }
+        return movedetect;
+    }
 
 
 
 
     private Directions directions;
 
-    Car(int nrDoors,double enginePower, Color color, String modelName){
+    Truck(int nrDoors,double enginePower, Color color, String modelName){
         directions = Directions.North;
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
+        platformState = PlatformState.DOWN;
     }
 
     public double getCurrentSpeed(){
@@ -44,20 +59,16 @@ public abstract class Car implements Movable {
         return currentSpeed;
 
     }
-    public abstract double speedFactor();
+    public double speedFactor(){
+        return enginePower * 0.01 * trimFactor;
+    }
 
     public void incrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-        if(currentSpeed > getEnginePower()){
-            currentSpeed = getEnginePower();
-        }
     }
 
     public void decrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-        if(currentSpeed < 0){
-            currentSpeed = 0;
-        }
     }
     public int getNrDoors(){
         return nrDoors;
@@ -84,35 +95,27 @@ public abstract class Car implements Movable {
         currentSpeed = 0;
     }
 
-    // TODO fix this method according to lab pm
     public void gas(double amount){
 
-       if (amount < 0|| amount > 1) {
-            throw new IllegalArgumentException("amount is not in range");
-
-        }
 
         incrementSpeed(amount);
 
-
+        if(currentSpeed > getEnginePower()){
+            currentSpeed = getEnginePower();
+        }
     }
 
-    // TODO fix this method according to lab pm
     public void brake(double amount){
-        if(amount < 0 || amount > 1) {
-            throw new IllegalArgumentException("amount is not in range");
-
-        }
-
 
 
 
 
         decrementSpeed(amount);
-
+        if(currentSpeed < 0){
+            currentSpeed = 0;
+        }
 
     }
-
 
 
 

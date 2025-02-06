@@ -39,7 +39,7 @@ class Volvo240Test {
             Volvo240.brake(1);
 
         }
-        assertEquals(true, 0 <= Volvo240.currentSpeed  && Volvo240.currentSpeed <= Volvo240.enginePower);
+        assertEquals(true, 0 <= Volvo240.getCurrentSpeed()  && Volvo240.getCurrentSpeed() <= Volvo240.getEnginePower());
     }
     @org.junit.jupiter.api.Test
     void testspeedongas(){
@@ -49,7 +49,7 @@ class Volvo240Test {
 
 
         }
-        assertEquals(true, 0 <= Volvo240.currentSpeed && Volvo240.currentSpeed <= Volvo240.enginePower);
+        assertEquals(true, 0 <= Volvo240.getCurrentSpeed() && Volvo240.getCurrentSpeed() <= Volvo240.getEnginePower());
     }
 
 
@@ -158,7 +158,7 @@ class Volvo240Test {
 
         Volvo240.startEngine();
 
-        assertEquals(0.1, Volvo240.currentSpeed);
+        assertEquals(0.1, Volvo240.getCurrentSpeed());
     }
 
     @org.junit.jupiter.api.Test
@@ -167,7 +167,7 @@ class Volvo240Test {
         Volvo240 Volvo240 = new Volvo240();
         Volvo240.stopEngine();
 
-        assertEquals(0, Volvo240.currentSpeed );
+        assertEquals(0, Volvo240.getCurrentSpeed() );
     }
 
 
@@ -176,7 +176,7 @@ class Volvo240Test {
     void testSpeedFactor() {
         Volvo240 Volvo240 = new Volvo240();
 
-        double speedfactor = Volvo240.enginePower * 0.01 * 1.25;
+        double speedfactor = Volvo240.getEnginePower() * 0.01 * 1.25;
 
         assertEquals(1.25, speedfactor);
     }
@@ -187,12 +187,11 @@ class Volvo240Test {
 
 
 
-        car.currentSpeed = 0;
 
         car.incrementSpeed(2);
 
 
 
-        assertNotEquals(0, car.currentSpeed);
+        assertNotEquals(0, car.getCurrentSpeed());
     }
 }
