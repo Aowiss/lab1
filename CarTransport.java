@@ -5,7 +5,15 @@ import java.util.Stack;
 public class CarTransport extends Truck {
 
 
-    private int maxCars = 5;
+    private static final double loadDistance = 5;
+
+
+    private int x;
+    private int y;
+
+    private int maxCars;
+
+
 
     private Stack<Car> cargo = new Stack<>();
     public CarTransport(){
@@ -13,9 +21,13 @@ public class CarTransport extends Truck {
         super(2, 150, Color.black, "CarTransport");
         canTransportmove();
 
+        this.x = x;
+        this.y = y;
 
 
     }
+
+
 
     public void canTransportmove(){
 
@@ -28,25 +40,38 @@ public class CarTransport extends Truck {
     }
 
 
-    boolean canLoad(){
+
+
+
+    boolean withinRadius(Car car){
+
+        double distance = Math.sqrt(Math.pow(car.GetX() - this.x, 2)) - Math.sqrt(Math.pow(car.GetY() - this.y,2));
+        return distance <= loadDistance;
+
+    }
+
+    boolean canLoad(Car car){
 
         boolean loadable = false;
-        if( (Objects.requireNonNull(platformState) == PlatformState.DOWN) && cargo.size() < maxCars) loadable = true;
+        if( (Objects.requireNonNull(platformState) == PlatformState.DOWN) && cargo.size() < maxCars && withinRadius(car)) loadable = true;
 
         return loadable;
     }
-    public void loadCar(Car car){
-        if(canLoad()){
+    public void loadCar(Car car, CarTransport cartransport){
+        if(canLoad(car)){
 
             cargo.push(car);
+
+            car.SetY(cartransport.GetY());
+            car.SetX(cartransport.GetX());
 
         }
 
 
     }
-    public Car deLoadCar() {
+    public Car deLoadCar(Car car) {
 
-        if (!cargo.isEmpty() && canLoad()) {
+        if (!cargo.isEmpty() && canLoad(car)) {
 
             Car unloadedcar = cargo.pop();
 

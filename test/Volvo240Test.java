@@ -181,17 +181,5 @@ class Volvo240Test {
         assertEquals(1.25, speedfactor);
     }
 
-    @org.junit.jupiter.api.Test
-    void testIncrementSpeed() {
-        Car car = new Saab95();
 
-
-
-
-        car.incrementSpeed(2);
-
-
-
-        assertNotEquals(0, car.getCurrentSpeed());
-    }
 }

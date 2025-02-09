@@ -206,18 +206,7 @@ class Saab95Test {
 
     }
 
-    @org.junit.jupiter.api.Test
-    void testIncrementSpeed() {
-        Car car = new Saab95();
 
-
-
-        car.incrementSpeed(2);
-
-
-        assertNotEquals(0, car.getCurrentSpeed());
-
-    }
 
 
 }

@@ -10,6 +10,9 @@ public abstract class Truck implements Movable{
 
     public PlatformState platformState;
 
+
+
+
     public void getPlatformState(){
         this.platformState = platformState;
     }

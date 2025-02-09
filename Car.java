@@ -9,6 +9,13 @@ public abstract class Car implements Movable {
     private String modelName;
 
 
+    public void SetY(double y){
+        this.y = y;
+    }
+    public void SetX(double x){
+        this.x = x;
+    }
+
     public double GetY(){
         return y;
     }
@@ -46,14 +53,14 @@ public abstract class Car implements Movable {
     }
     public abstract double speedFactor();
 
-    public void incrementSpeed(double amount){
+    private void incrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
         if(currentSpeed > getEnginePower()){
             currentSpeed = getEnginePower();
         }
     }
 
-    public void decrementSpeed(double amount){
+    private void decrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
         if(currentSpeed < 0){
             currentSpeed = 0;
