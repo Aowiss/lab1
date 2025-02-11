@@ -1,28 +1,29 @@
 import java.awt.*;
+import java.util.ArrayDeque;
 import java.util.Objects;
 import java.util.Stack;
 
 public class CarTransport extends Truck {
 
 
-    private static final double loadDistance = 5;
-
-
-    private int x;
-    private int y;
-
-    private int maxCars;
 
 
 
-    private Stack<Car> cargo = new Stack<>();
+
+    private final int maxCars = 5;
+
+
+
+    public int GetCargosize(){
+        return cargo.size();
+    }
+    private ArrayDeque<Car> cargo = new ArrayDeque<>();
     public CarTransport(){
 
-        super(2, 150, Color.black, "CarTransport");
+        super(2, 300, Color.black, "CarTransport");
         canTransportmove();
 
-        this.x = x;
-        this.y = y;
+
 
 
     }
@@ -31,7 +32,7 @@ public class CarTransport extends Truck {
 
     public void canTransportmove(){
 
-        if (Objects.requireNonNull(platformState) == PlatformState.DOWN) if (isMoving()) {
+        if (Objects.requireNonNull(getPlatformState()) == PlatformState.DOWN) if (isMoving()) {
             System.out.println("Can't move with ramp down");
 
             currentSpeed = 0;
@@ -43,27 +44,24 @@ public class CarTransport extends Truck {
 
 
 
-    boolean withinRadius(Car car){
 
-        double distance = Math.sqrt(Math.pow(car.GetX() - this.x, 2)) - Math.sqrt(Math.pow(car.GetY() - this.y,2));
-        return distance <= loadDistance;
-
-    }
 
     boolean canLoad(Car car){
 
         boolean loadable = false;
-        if( (Objects.requireNonNull(platformState) == PlatformState.DOWN) && cargo.size() < maxCars && withinRadius(car)) loadable = true;
+        if( (Objects.requireNonNull(getPlatformState()) == PlatformState.DOWN) && cargo.size() < maxCars && withinRadius(car)) {
+            loadable = true;
+        }
 
         return loadable;
     }
-    public void loadCar(Car car, CarTransport cartransport){
+    public void loadCar(Car car){
         if(canLoad(car)){
 
-            cargo.push(car);
+            cargo.add(car);
 
-            car.SetY(cartransport.GetY());
-            car.SetX(cartransport.GetX());
+            car.SetY(this.GetY());
+            car.SetX(this.GetX());
 
         }
 
@@ -73,7 +71,7 @@ public class CarTransport extends Truck {
 
         if (!cargo.isEmpty() && canLoad(car)) {
 
-            Car unloadedcar = cargo.pop();
+            Car unloadedcar = cargo.remove();
 
             System.out.println("Car has been unloaded");
 

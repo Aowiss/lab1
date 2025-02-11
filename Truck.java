@@ -8,13 +8,13 @@ public abstract class Truck implements Movable{
     public Color color; // Color of the car
     public String modelName;
 
-    public PlatformState platformState;
+    private PlatformState platformState;
 
 
 
 
-    public void getPlatformState(){
-        this.platformState = platformState;
+    public PlatformState getPlatformState(){
+        return platformState;
     }
 
 
@@ -25,7 +25,15 @@ public abstract class Truck implements Movable{
     public double GetX(){
         return x;
     }
+    private static final double LOAD_DISTANCE = 5;
 
+
+    boolean withinRadius(Car car){
+
+        double distance = Math.sqrt(Math.pow(car.GetX() - this.x, 2)) + Math.sqrt(Math.pow(car.GetY() - this.y,2));
+        return distance <= LOAD_DISTANCE;
+
+    }
 
     private double x;
     private double y;
