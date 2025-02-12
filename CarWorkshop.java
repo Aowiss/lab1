@@ -25,7 +25,11 @@ public class CarWorkshop <T extends Car> {
     public void removeCar(T car){
 
         if(!Cars.isEmpty()){
-            Cars.removeFirst();
+
+            Car retrievedcar = Cars.removeFirst();
+
+
+            System.out.println(retrievedcar + "has been retrieved");
         }
 
         else {

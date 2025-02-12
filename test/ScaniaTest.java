@@ -15,6 +15,13 @@ class ScaniaTest {
 
     @Test
     void platformRaise() {
+        Scania scania = new Scania();
+        scania.platformAngle = 0;
+
+        scania.platformRaise(10);
+
+        assertEquals(10, scania.platformAngle);
+
     }
 
     @Test
