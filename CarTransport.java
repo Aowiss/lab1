@@ -36,6 +36,11 @@ public class CarTransport extends Truck {
 
     }
 
+    @Override
+    public void move() {
+        super.move();
+        stayWithTransport();
+    }
 
     public void stayWithTransport(){
 
