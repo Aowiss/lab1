@@ -54,8 +54,11 @@ class CarTransportTest {
         Car car = new Saab95();
         cartrans.loadCar(car);
 
+        cartrans.setX(8);
 
-        assertEquals(car.GetX(), cartrans.GetX());
+
+
+        assertEquals(8.0, car.GetX());
         assertTrue(cartrans.GetCargosize() == 1);
     }
 

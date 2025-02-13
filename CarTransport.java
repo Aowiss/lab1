@@ -1,14 +1,23 @@
 import java.awt.*;
 import java.util.ArrayDeque;
 import java.util.Objects;
-import java.util.Stack;
 
 public class CarTransport extends Truck {
 
 
 
 
+    public void setX(double x){
 
+        super.setX(x);
+
+        stayWithTransport();
+    }
+
+    public void setY(double y){
+        super.setY(y);
+        stayWithTransport();
+    }
 
     private final int maxCars = 5;
 
@@ -22,13 +31,25 @@ public class CarTransport extends Truck {
 
         super(2, 300, Color.black, "CarTransport");
         canTransportmove();
-
-
+        Platformcheck();
 
 
     }
 
 
+    public void stayWithTransport(){
+
+
+        for (Car cars : cargo) {
+            cars.SetX(this.GetX());
+            cars.SetY(this.GetY());
+
+            }
+
+
+
+
+    }
 
     public void canTransportmove(){
 
@@ -39,12 +60,6 @@ public class CarTransport extends Truck {
 
         }
     }
-
-
-
-
-
-
 
     boolean canLoad(Car car){
 
@@ -60,10 +75,9 @@ public class CarTransport extends Truck {
 
             cargo.add(car);
 
-            car.SetY(this.GetY());
-            car.SetX(this.GetX());
-
         }
+        stayWithTransport();
+
 
 
     }
@@ -73,7 +87,7 @@ public class CarTransport extends Truck {
 
             Car unloadedcar = cargo.remove();
 
-            System.out.println("Car has been unloaded");
+            System.out.println(unloadedcar + " has been unloaded");
 
             return unloadedcar;
 

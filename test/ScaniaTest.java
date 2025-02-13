@@ -16,23 +16,23 @@ class ScaniaTest {
     @Test
     void platformRaise() {
         Scania scania = new Scania();
-        scania.platformAngle = 0;
+        scania.getAngle();
 
         scania.platformRaise(10);
 
-        assertEquals(10, scania.platformAngle);
+        assertEquals(10, scania.getAngle());
 
     }
 
     @Test
     void platformLower() {
         Scania scania = new Scania();
-        scania.platformAngle = 70;
+        scania.platformRaise(70);
 
         scania.platformLower(60);
 
 
-        assertEquals(10, scania.platformAngle);
+        assertEquals(10, scania.getAngle());
     }
 
     @Test
@@ -40,7 +40,7 @@ class ScaniaTest {
         Scania scania = new Scania();
 
         scania.startEngine();
-        scania.platformAngle = 2;
+        scania.platformRaise(2);
         scania.isPlatformraised();
 
 
