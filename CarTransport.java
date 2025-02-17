@@ -42,6 +42,14 @@ public class CarTransport extends Truck {
         stayWithTransport();
     }
 
+
+    public void platformraise(){
+
+        if(isMoving()){
+            System.out.print("cant move platform if truck is moving");
+            currentSpeed = 0;
+        }
+    }
     public void stayWithTransport(){
 
 

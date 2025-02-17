@@ -15,8 +15,6 @@ public class CarWorkshop <T extends Car> {
 
         }
 
-
-
         else{
             System.out.println("Workshop is full at the moment");
         }
@@ -25,16 +23,12 @@ public class CarWorkshop <T extends Car> {
     public void removeCar(T car){
 
         if(!Cars.isEmpty()){
-
             Car retrievedcar = Cars.removeFirst();
-
-
             System.out.println(retrievedcar + "has been retrieved");
         }
 
         else {
             throw new IllegalArgumentException("Workshop is empty, can't remove any car");
-
         }
     }
 
