@@ -5,6 +5,10 @@ public class Scania extends Truck {
 
     private final Platform platform;
 
+    public double getAngle(){
+
+        return platform.getAngle();
+    }
     public Scania() {
         super(3, 150, Color.white, "Scania");
 

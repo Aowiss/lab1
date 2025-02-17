@@ -27,11 +27,12 @@ public class CarTransport extends Truck {
         return cargo.size();
     }
     private ArrayDeque<Car> cargo = new ArrayDeque<>();
+    private final Platform platform;
     public CarTransport(){
 
         super(2, 300, Color.black, "CarTransport");
         canTransportmove();
-        Platformcheck();
+        platform = new Platform();
 
 
     }
@@ -66,7 +67,7 @@ public class CarTransport extends Truck {
 
     public void canTransportmove(){
 
-        if (Objects.requireNonNull(getPlatformState()) == PlatformState.DOWN) if (isMoving()) {
+        if (Objects.requireNonNull(platform.getPlatformState()) == PlatformState.DOWN) if (isMoving()) {
             System.out.println("Can't move with ramp down");
 
             currentSpeed = 0;
@@ -77,7 +78,7 @@ public class CarTransport extends Truck {
     boolean canLoad(Car car){
 
         boolean loadable = false;
-        if( (Objects.requireNonNull(getPlatformState()) == PlatformState.DOWN) && cargo.size() < maxCars && withinRadius(car)) {
+        if( (Objects.requireNonNull(platform.getPlatformState()) == PlatformState.DOWN) && cargo.size() < maxCars && withinRadius(car)) {
             loadable = true;
         }
 
@@ -108,6 +109,18 @@ public class CarTransport extends Truck {
 
     }
 
+
+    public void platformRaise() {
+
+        if (isMoving()) {
+
+            System.out.println("Cannot move platform if truck is moving!!");
+
+            return;
+
+        }
+        platform.Raise(70);
+    }
 
 
 
